@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = 3042;
+const verify = require("./verify");
 
 app.use(cors());
 app.use(express.json());
@@ -19,17 +20,24 @@ app.get("/balance/:address", (req, res) => {
 });
 
 app.post("/send", (req, res) => {
-  const { sender, amount, recipient } = req.body;
+  const { sender, amount, recipient, signature, hash } = req.body;
 
-  setInitialBalance(sender);
-  setInitialBalance(recipient);
+  const isValid = verify(signature, hash, sender);
 
-  if (balances[sender] < amount) {
-    res.status(400).send({ message: "Not enough funds!" });
-  } else {
-    balances[sender] -= amount;
-    balances[recipient] += amount;
-    res.send({ balance: balances[sender] });
+  if(isValid){
+    setInitialBalance(sender);
+    setInitialBalance(recipient);
+  
+    if (balances[sender] < amount) {
+      res.status(400).send({ message: "Not enough funds!" });
+    } else {
+      balances[sender] -= amount;
+      balances[recipient] += amount;
+      res.send({ balance: balances[sender] });
+    }
+  }
+  else{
+    res.status(401).send({ message })
   }
 });
 
