@@ -21,16 +21,34 @@ const alchemy = new Alchemy(settings);
 
 function App() {
   const [blockNumber, setBlockNumber] = useState();
+  const [block, setBlock] = useState({});
+  const [txs, setTxs] = useState([]);
 
   useEffect(() => {
     async function getBlockNumber() {
       setBlockNumber(await alchemy.core.getBlockNumber());
+      setBlock(await alchemy.core.getBlock(blockNumber));
+      setTxs((await alchemy.core.getBlock(blockNumber)).transactions);
     }
 
     getBlockNumber();
-  });
+  }, []);
 
-  return <div className="App">Block Number: {blockNumber}</div>;
+  return (
+    <div className="App">
+      <h1 className="title">Web3 ETH Explorer</h1>
+      <div className='block-head'>
+        <p><b>🚀Current Block📦⛏️: </b>{blockNumber}</p>
+        <div className='block-details'>
+          <h4>Block Details 👇👇👇</h4>
+          <p><b>Hash#️⃣: </b>{block.hash}</p>
+          <p><b>TimeStamp⌛: </b>{block.timestamp}</p>
+          <p><b>Nonce🔢: </b>{block.nonce}</p>
+          <p><b>Transactions🧮: </b>{txs.length} transactions in this block</p>
+        </div>
+        
+      </div>
+    </div>);
 }
 
 export default App;
