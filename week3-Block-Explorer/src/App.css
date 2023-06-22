@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 10px;
 }
 
 .App-logo {
@@ -38,6 +39,16 @@
 }
 
 .block-head {
-  margin-left: 20%;
   text-align: left;
+}
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.block-details{
+  border: 1px solid gray;
+  padding: 16px;
 }
