@@ -20,7 +20,7 @@ export default function CurrentBlock () {
           setTxs((await alchemy.core.getBlock(blockNumber)).transactions);
         }
         getBlockNumber();
-      }, []);
+      }, [blockNumber]);
 
     return(
         <div className='current-block'>
