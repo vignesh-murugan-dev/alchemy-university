@@ -2,8 +2,6 @@ import './App.css';
 import CurrentBlock from './components/CurrentBlock';
 import TxHash from './components/TxHash';
 
-
-
 function App() {
 
   return (
