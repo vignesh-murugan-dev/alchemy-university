@@ -38,7 +38,7 @@
   }
 }
 
-.block-head {
+.Main {
   text-align: left;
 }
 
@@ -48,7 +48,12 @@
   align-items: center;
 }
 
-.block-details{
+.current-block{
+  border: 1px solid gray;
+  padding: 16px;
+}
+
+.tx-hash{
   border: 1px solid gray;
   padding: 16px;
 }
