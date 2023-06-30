@@ -7,7 +7,7 @@ module.exports = {
   networks: {
     goerli: {
       url: process.env.RPC_URL,
-      accounts: []
+      accounts: [process.env.PRIVATE_KEY]
     }
   }
 };

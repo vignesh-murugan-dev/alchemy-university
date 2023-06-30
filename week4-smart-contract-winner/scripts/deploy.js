@@ -1,23 +1,21 @@
-const ethers = require('ethers');
-require('dotenv').config();
-const hre = require("hardhat");
+// deploy.js
+const hre = require('hardhat');
 
-async function main() {
+async function main () {
+    const contractAddress = "0xcF469d3BEB3Fc24cEe979eFf83BE33ed50988502";
 
-  // compile the contract
-  await hre.run("compile");
+    const EmitWinner = await hre.ethers.getContractFactory("Winner");
+    const emitWinner = await EmitWinner.deploy(contractAddress);
 
-  // Get the ContractFactory of Contract
-  const Contract = await hre.ethers.getContractFactory("Contract");
-  
-  // Deploy the Contract
-  const contract = await Contract.deploy();
-  await contract.waitForDeployment();
+    await emitWinner.waitForDeployment();
+    console.log(`Contract deployed at ${emitWinner.target}`);
 
-  console.log(`Contract deployed to ${contract.target}`);
+    const result = await emitWinner.callWinner();
+    console.log(result);
+
 }
 
 main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+    console.error(error);
+    process.exitCode = 1;
+})

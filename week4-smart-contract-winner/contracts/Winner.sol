@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+//SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
 interface Contract {
@@ -6,11 +6,12 @@ interface Contract {
 }
 
 contract Winner {
-    address public owner;
-    constructor(){
-        owner = msg.sender;
+    address contractAddress;
+
+    constructor(address _contractAddress){
+        contractAddress = _contractAddress;
     }
-    function jackpot() external{
-        Contract.attempt();
+    function callWinner() external{
+        return Contract(contractAddress).attempt();
     }
 }
