@@ -10,9 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "chai": "^4.3.7",
     "dotenv": "^16.3.1",
-    "ethers": "^6.6.2",
+    "ethereum-waffle": "^4.0.10",
+    "ethers": "^5.0.0",
     "hardhat": "^2.16.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0"
   }
 }
