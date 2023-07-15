@@ -1,7 +1,37 @@
 body {
   background-color: #eee;
+  font-family: cursive;
+}
+
+nav{
   display: flex;
-  font-family: 'Muli', sans-serif;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links{
+  display: flex;
+  justify-content: space-around;  
+}
+
+.links > p {
+  margin: 0px 10px;
+}
+
+.links > p:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.title{
+  text-align: center;
+  text-decoration: underline;
+  font-style: italic;
+}
+
+.container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .contract, .existing-contracts {

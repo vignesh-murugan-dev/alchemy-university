@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import deploy from './deploy';
 import Escrow from './Escrow';
+import logo from '../src/logo.png';
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -29,7 +30,8 @@ function App() {
   async function newContract() {
     const beneficiary = document.getElementById('beneficiary').value;
     const arbiter = document.getElementById('arbiter').value;
-    const value = ethers.BigNumber.from(document.getElementById('wei').value);
+    // getting input value in the form of ethers - 10^18
+    const value = ethers.utils.parseEther(document.getElementById('ether').value);
     const escrowContract = await deploy(signer, arbiter, beneficiary, value);
 
 
@@ -55,7 +57,16 @@ function App() {
 
   return (
     <>
-      <div className="contract">
+    <nav>
+      <img src={logo} alt="logo" height={'50px'} width={'50px'} />
+      <h1 className='title'>Decentralized Escrow Application</h1>
+      <div className='links'>
+        <p>Github</p>
+        <p>Twitter</p>
+      </div>
+    </nav>
+    <div className='container'>
+      <div className="contract col-1">
         <h1> New Contract </h1>
         <label>
           Arbiter Address
@@ -68,8 +79,8 @@ function App() {
         </label>
 
         <label>
-          Deposit Amount (in Wei)
-          <input type="text" id="wei" />
+          Deposit Amount (in Ethers)
+          <input type="text" id="ether" />
         </label>
 
         <div
@@ -85,15 +96,18 @@ function App() {
         </div>
       </div>
 
-      <div className="existing-contracts">
-        <h1> Existing Contracts </h1>
+      <div className='col-2'>
+        <div className="existing-contracts">
+          <h1> Existing Contracts </h1>
 
-        <div id="container">
-          {escrows.map((escrow) => {
-            return <Escrow key={escrow.address} {...escrow} />;
-          })}
+          <div id="container">
+            {escrows.map((escrow) => {
+              return <Escrow key={escrow.address} {...escrow} />;
+            })}
+          </div>
         </div>
-      </div>
+      </div>    
+      </div>    
     </>
   );
 }
